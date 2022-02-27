@@ -26,6 +26,7 @@ void injectByte(uint* num, uint byte, uint col);
 
 // other utils
 void printArray(uint* arr, uint len);
+uint* generateRandomArray(uint len, uint lo, uint hi);
 uint* generateRangeArray(uint len);
 bool isSorted(uint* arr, uint len);
 void shuffle(uint* arr, uint len);
@@ -57,9 +58,9 @@ int main(int argc, char* argv[]) {
     assert(len == longlen);
 
     // Generate array
-    arr = generateRangeArray(len);
+    arr = generateRandomArray(len, 0, len);
     printArray(arr, len);
-    assert(isSorted(arr, len));
+    // assert(isSorted(arr, len));
 
     // Shuffle
     shuffle(arr, len);
@@ -156,6 +157,12 @@ void injectByte(uint* num, uint byte, uint col) {
 uint* generateRangeArray(uint len) {
     uint* res = (uint*)malloc(len * sizeof(uint));
     for (uint i = 0; i < len; i++) res[i] = i;
+    return res;
+}
+
+uint* generateRandomArray(uint len, uint lo, uint hi) {
+    uint* res = (uint*)malloc(len * sizeof(uint));
+    for (uint i = 0; i < len; i++) res[i] = (rand() % (hi-lo)) + lo;
     return res;
 }
 
